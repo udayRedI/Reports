@@ -1,0 +1,60 @@
+<!doctype html>
+<html ng-app="SearchApplication">
+    <head>
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="styles/Main.css">
+    </head>
+    <body ng-controller="SearchController">
+        <div class="container">
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <div class="controls">
+                        <select class="form-control" focus-on="selectColumnName" ng-model="tableName" ng-change="selectTable()">
+                                <option  href="#">Table Name</option>
+                                <option  ng-repeat="tableName in tables"  href="#">{{tableName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="btn-group">
+                        <select class="form-control" id="selectColumnName" ng-model="tableColumnName" ng-change="selectTableColumn()">
+                                <option  href="#">Column Name</option>
+                                <option  ng-repeat="columnName in columns"  href="#">{{columnName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="search-box" ng-model="searchBox">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button">Search</button>
+                        </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <table ng-init="show=0" ng-show="show==1" class="table table-bordered">
+                    <thead>
+                        <tr>
+                          <th></th>
+                          <th ng-repeat="columnName in columns" >{{columnName}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="row in rows">
+                        <td>{{$index+1}}</td>
+                        <td ng-repeat="columnValue in row">{{columnValue}}</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+         </div>
+        <script src="scripts/imports/angular/angular.js"></script>
+        <script src="scripts/modules/ui-bootstrap/ui-bootstrap-tpls-0.7.0.js"></script>
+        <script src="scripts/modules/FocusOn/FocusOn.js"></script>
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/SearchController.js"></script>
+    </body>
+</html>
