@@ -1,8 +1,8 @@
-var app = angular.module('SearchApplication');
-app.factory('TableRowsService', function($rootScope){
+var databaseSearch = angular.module('DatabaseSearch');
+databaseSearch.factory('DatabaseRowsService', function($rootScope){
     return{
         rows: [],
-        addNewSet: function(rows){
+        addNewRows: function(rows){
             this.rows = rows;
             $rootScope.$broadcast('rows.added');
         },

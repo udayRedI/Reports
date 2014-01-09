@@ -1,5 +1,5 @@
-angular.module('SearchApplication')
-.controller("SearchController", [ '$scope', '$http', 'TableRowsService', 'MultiColumnSearchService', function($scope, $http, tableRowsService, multiColumnSearchService){
+var databaseSearch = angular.module('DatabaseSearch');
+databaseSearch.controller("SearchController", [ '$scope', '$http', 'DatabaseFilterService', 'DatabaseRowsService',  'DatabaseColumnsService', function($scope, $http, databaseFilterService, databaseRowsService, databaseColumnsService){
 
     $scope.tableNames = [];
     $scope.tableName;
@@ -22,32 +22,31 @@ angular.module('SearchApplication')
     });
 
     $scope.$watch("tableName", function(){
-        var tableName = $scope.tableName;
-        $http({method: 'GET', url: '/Reporting/TableContents.json?tablename='+tableName}).
-            success(function(tableContents, status, headers, config){
-                $scope.columns = tableContents.columns;
-                tableContents.columns.forEach(function(column){
-                    $scope.searchFields[tableContents.columns.indexOf(column)] = '';
-                });
-                console.log($scope.searchFields);
-                $scope.rows = tableContents.rows;
-                $scope.show = 1;
-        });
+        $scope.search(1);
     });
 
     $scope.search = function(pageNo){
-        var queryString = "?pageNo="+pageNo
+        var queryString = "?"+"tableName="+$scope.tableName+"&pageNo="+pageNo
         $scope.columns.forEach(function(column, index){
             if(!column.disabled && $scope.searchFields[index] != ""){
                 queryString = queryString + "&"+column.name+"="+$scope.searchFields[index];
             }
         });
         console.log(queryString);
-        multiColumnSearchService.search(queryString);
+        databaseFilterService.search(queryString);
     };
 
     $scope.$on('rows.added', function(){
-        $scope.rows = tableRowsService.getRows();
+        console.log('Rows Added');
+        $scope.rows = databaseRowsService.getRows();
+    });
+
+    $scope.$on('columns.added', function(){
+        console.log('Columns Added');
+        $scope.columns = databaseColumnsService.getColumns();
+        $scope.columns.forEach(function(column, columnIndex){
+            $scope.searchFields[columnIndex] = '';
+        });
     });
 
     $scope.$watch('currentPage', function(pageNo){

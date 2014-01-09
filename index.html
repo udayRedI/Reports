@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="SearchApplication">
+<html ng-app="DatabaseSearch">
     <head>
         <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="styles/bootstrap-pagination.css">
@@ -13,8 +13,7 @@
             <div class="row form-group">
                 <div class="col-md-3">
                     <div class="controls">Table Name:<!-- -->
-                        <select ng-model="tableName" class="form-control" >
-                            <option ng-repeat="table in tableNames" >{{table}}</option>
+                        <select ng-model="tableName" class="form-control" ng-options="tableName for tableName in tableNames">
                         </select>
                     </div>
                 </div>
@@ -28,7 +27,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                     <table ng-init="show=0" ng-show="show==1" class="table table-bordered">
+                     <table class="table table-bordered">
                          <thead>
                              <tr>
                                <th></th>
@@ -49,13 +48,13 @@
                 </div>
                 <pagination boundary-links="true" total-items="totalItems" current-page="currentPage" items-per-page="resultsPerPage" max-size="resultsPerPage" page="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
             </div>
-         </div>
+        </div>
         <script src="scripts/imports/angular/angular.js"></script>
         <script src="scripts/modules/ui-bootstrap/ui-bootstrap-tpls-0.7.0.js"></script>
-        <script src="scripts/modules/FocusOn/FocusOn.js"></script>
         <script src="scripts/app.js"></script>
-        <script src="scripts/services/MultiColumnSearch.js"></script>
-        <script src="scripts/services/TableRows.js"></script>
+        <script src="scripts/services/DatabaseFilterService.js"></script>
+        <script src="scripts/services/DatabaseRowsService.js"></script>
+        <script src="scripts/services/DatabaseColumnsService.js"></script>
         <script src="scripts/controllers/SearchController.js"></script>
     </body>
 </html>

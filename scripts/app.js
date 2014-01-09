@@ -1,1 +1,1 @@
-var searchApplicationModule = angular.module('SearchApplication', ['ui.bootstrap','FocusOn']);
+var databaseSearch = angular.module('DatabaseSearch', ['ui.bootstrap']);
