@@ -1,10 +1,26 @@
-{"tables":
-    [
-        "Table1",
-        "Table2",
-        "Table3",
-        "Table4",
-        "Table5",
-        "Table10"
-    ]
-}
+[
+    {"name":"Table1",
+     "columns":[
+                "col1","col2","col3"
+    ]},
+    {"name":"Table2",
+      "columns":[
+                "col5","col3","col9"
+    ]},
+    {"name":"Table3",
+     "columns":[
+                "co1211","co122","col12"
+    ]},
+    {"name":"Table4",
+     "columns":[
+                "col1","col2","col3"
+    ]},
+    {"name":"Table5",
+     "columns":[
+                "col1","col2","col3"
+    ]},
+    {"name":"Table6",
+     "columns":[
+                "col1","col2","col3"
+    ]}
+]

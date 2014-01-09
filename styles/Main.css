@@ -1,3 +1,22 @@
 select{
     height:34px;
 }
+
+.page-header {
+padding-bottom: 0px;
+margin: 20px 0 20px;
+}
+
+.form-control {
+display: initial;
+width: auto;
+}
+
+th{
+color: white;
+background-color: #66afe9;
+}
+
+.input-group{
+width:100%;
+}

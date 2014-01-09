@@ -1,0 +1,31 @@
+angular.module('SearchApplication')
+.controller("SearchController", [ '$scope', '$http', 'TableRowsService', function($scope, $http, tableRowsService){
+
+    $scope.tableNames = [];
+    $scope.tableName;
+    $scope.rows = [];
+    $scope.searchColumns = [];
+    $scope.columns = [];
+    $http({method: 'GET', url: '/Reporting/TableNames.json'}).
+        success(function(tableNames, status, headers, config){
+            tableNames.forEach(function(table){
+                $scope.tableNames.push(table.name);
+            });
+    });
+
+    $scope.$watch("tableName", function(){
+        var tableName = $scope.tableName;
+        console.log('Changing table Name');
+        $http({method: 'GET', url: '/Reporting/TableContents.json?tablename='+tableName}).
+            success(function(tableContents, status, headers, config){
+                $scope.columns = tableContents.columns;
+                $scope.searchColumns = tableContents.columns;
+                //$scope.rows = tableContents.rows;
+                $scope.show = 1;
+        });
+    });
+
+    $scope.$on('rows.added', function(){
+        $scope.rows = tableRowsService.getRows();
+    });
+}]);

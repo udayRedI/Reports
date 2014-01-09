@@ -1,10 +1,10 @@
 {"columns":
     [
-        "Column1",
-        "Column2",
-        "Column3",
-        "Column4",
-        "Column5"
+        {"name":"Column1","disabled":false},
+        {"name":"Column2","disabled":false},
+        {"name":"Column3","disabled":true},
+        {"name":"Column4","disabled":false},
+        {"name":"Column5","disabled":false}
     ],
  "rows":
     [
