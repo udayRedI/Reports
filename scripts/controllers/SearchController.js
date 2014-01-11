@@ -2,16 +2,11 @@ var databaseSearch = angular.module('DatabaseSearch');
 databaseSearch.controller("SearchController", [ '$scope', '$http', 'DatabaseFilterService', 'DatabaseRowsService',  'DatabaseColumnsService', function($scope, $http, databaseFilterService, databaseRowsService, databaseColumnsService){
 
     $scope.tableNames = [];
-    $scope.tableName;
     $scope.rows = [];
     $scope.searchFields = {};
     $scope.columns = [];
-    $scope.resultsList = ["5", "10", "20", "30", "40"];
-    $scope.resultsPerPage = "5";
-    $scope.totalItems = $scope.rows.length;
-    $scope.currentPage = 1;
-    $scope.maxSize = 0;
-    $scope.currentPage;
+    $scope.resultsList = [{value:"5"}, {value:"10"}, {value:"20"}, {value:"30"}, {value:"40"}];
+    $scope.table = {name:'', resultsPerPage:'5', totalLength:'0', currentPage:'1'};
 
     $http({method: 'GET', url: '/Reporting/TableNames.json'}).
         success(function(tableNames, status, headers, config){
@@ -41,15 +36,21 @@ databaseSearch.controller("SearchController", [ '$scope', '$http', 'DatabaseFilt
         $scope.rows = databaseRowsService.getRows();
     });
 
+    $scope.$on('rowsLength.added', function(){
+        console.log('Rows length added');
+        $scope.table.totalLength = databaseRowsService.getTotalRows();
+    });
+
     $scope.$on('columns.added', function(){
         console.log('Columns Added');
         $scope.columns = databaseColumnsService.getColumns();
         $scope.columns.forEach(function(column, columnIndex){
             $scope.searchFields[columnIndex] = '';
         });
+        console.log($scope.searchFields);
     });
 
-    $scope.$watch('currentPage', function(pageNo){
-        $scope.search(pageNo);
+    $scope.$watch('table.currentPage', function(newValue, oldValue){
+        $scope.search(newValue);
     });
 }]);

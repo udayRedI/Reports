@@ -13,15 +13,15 @@
             <div class="row form-group">
                 <div class="col-md-3">
                     <div class="controls">Table Name:
-                        <select ng-model="tableName" class="form-control" ng-options="tableName for tableName in tableNames">
+                        <select ng-model="table.name" class="form-control" ng-options="tableName for tableName in tableNames">
                         </select>
                     </div>
                 </div>
                 <div class="col-md-offset-5 col-md-4">
                     <button type="button"  class="pull-right btn btn-default" ng-click="search(1)">Search</button>
                     Results per page:
-                    <select ng-model="resultsPerPage" class="form-control" >
-                        <option ng-repeat="result in resultsList" >{{result}}</option>
+                    <select ng-model="table.resultsPerPage" class="form-control" >
+                        <option ng-repeat="result in resultsList" >{{result.value}}</option>
                     </select>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                          </tbody>
                      </table>
                 </div>
-                <pagination boundary-links="true" total-items="totalItems" current-page="currentPage" items-per-page="resultsPerPage" max-size="resultsPerPage" page="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                <pagination boundary-links="true" total-items="table.totalLength" current-page="table.currentPage" items-per-page="table.resultsPerPage"  page="table.currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
             </div>
         </div>
         <script src="scripts/imports/angular/angular.js"></script>
