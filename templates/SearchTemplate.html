@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="page-header">
+        <h2>Reporting</h2>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3">
+            <div class="controls">Table Name:<!-- -->
+                <select ng-model="tableName" class="form-control" ng-options="tableName for tableName in tableNames">
+                </select>
+            </div>
+        </div>
+        <div class="col-md-offset-5 col-md-4">
+            <button type="button"  class="pull-right btn btn-default" ng-click="search(1)">Search</button>
+            Results per page:
+            <select ng-model="resultsPerPage" class="form-control" >
+                <option ng-repeat="result in resultsList" >{{result.value}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+             <table class="table table-bordered">
+                 <thead>
+                     <tr>
+                       <th></th>
+                       <th ng-repeat="column in columns" >{{column.name}}</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                   <td></td>
+                   <td ng-repeat="(key, value) in searchFields track by key">
+                     <input class="form-control" ng-model="searchFields[key]" type="text" ng-disabled="{{columns[key].disabled}}">
+                   </td>
+                   <tr ng-repeat="row in rows">
+                     <td>{{$index+1}}</td>
+                     <td ng-repeat="columnValue in row">{{columnValue}}</td>
+                   </tr>
+                 </tbody>
+             </table>
+        </div>
+        <pagination boundary-links="true" total-items="totalItems" current-page="currentPage" items-per-page="resultsPerPage" max-size="resultsPerPage" page="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+    </div>
+</div>
