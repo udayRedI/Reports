@@ -1,27 +1,28 @@
-var databaseSearch = angular.module('DatabaseSearch');
-databaseSearch.controller("SearchController", [ '$scope', '$http', 'DatabaseFilterService', 'DatabaseRowsService',  'DatabaseColumnsService', function($scope, $http, databaseFilterService, databaseRowsService, databaseColumnsService){
+var databaseReports = angular.module('DatabaseReports');
+databaseReports.controller("SearchController", [ '$scope', '$http', 'DatabaseFilterService', 'DatabaseRowsService',  'DatabaseColumnsService', function($scope, $http, databaseFilterService, databaseRowsService, databaseColumnsService){
 
     $scope.tableNames = [];
     $scope.rows = [];
     $scope.searchFields = {};
     $scope.columns = [];
-    $scope.resultsList = [{value:"5"}, {value:"10"}, {value:"20"}, {value:"30"}, {value:"40"}];
-    $scope.table = {name:'', resultsPerPage:'5', totalLength:'0', currentPage:'1'};
+    $scope.resultsList = ["5", "10", "20", "30", "40"];
+    $scope.table = {name:"", resultsPerPage:"5", totalRows:"0", currentPage:"1"};
+    $scope.table.resultsPerPage = "5";
 
     $http({method: 'GET', url: '/Reporting/TableNames.json'}).
         success(function(tableNames, status, headers, config){
             tableNames.forEach(function(table){
                 $scope.tableNames.push(table.name);
-                $scope.tableName = $scope.tableNames[0];
+                $scope.table.name = $scope.tableNames[0];
             });
     });
 
-    $scope.$watch("tableName", function(){
+    $scope.$watch("table.name", function(){
         $scope.search(1);
     });
 
     $scope.search = function(pageNo){
-        var queryString = "?"+"tableName="+$scope.tableName+"&pageNo="+pageNo
+        var queryString = "?"+"tableName="+$scope.table.name+"&pageNo="+pageNo
         $scope.columns.forEach(function(column, index){
             if(!column.disabled && $scope.searchFields[index] != ""){
                 queryString = queryString + "&"+column.name+"="+$scope.searchFields[index];
@@ -38,7 +39,7 @@ databaseSearch.controller("SearchController", [ '$scope', '$http', 'DatabaseFilt
 
     $scope.$on('rowsLength.added', function(){
         console.log('Rows length added');
-        $scope.table.totalLength = databaseRowsService.getTotalRows();
+        $scope.table.totalRows = databaseRowsService.getTotalRows();
     });
 
     $scope.$on('columns.added', function(){

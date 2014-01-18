@@ -1,1 +1,1 @@
-var databaseSearch = angular.module('DatabaseSearch', ['ui.bootstrap']);
+var databaseReports = angular.module('MyReporting', ['ui.bootstrap', 'DatabaseReports']);

@@ -1,5 +1,5 @@
-var databaseSearch = angular.module('DatabaseSearch');
-databaseSearch.factory('DatabaseRowsService', function($rootScope){
+var databaseReports = angular.module('DatabaseReports');
+databaseReports.factory('DatabaseRowsService', function($rootScope){
 
     var rows = [],length = 0;
     return{

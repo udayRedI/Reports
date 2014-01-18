@@ -1,5 +1,5 @@
-var databaseSearch = angular.module('DatabaseSearch');
-databaseSearch.factory('DatabaseFilterService', ['$rootScope', '$http', 'DatabaseRowsService', 'DatabaseColumnsService', function($rootScope, $http, databaseRowsService, databaseColumnsService){
+var databaseReports = angular.module('DatabaseReports');
+databaseReports.factory('DatabaseFilterService', ['$rootScope', '$http', 'DatabaseRowsService', 'DatabaseColumnsService', function($rootScope, $http, databaseRowsService, databaseColumnsService){
     return{
         search : function(queryString){
             $http({method: 'GET', url: '/Reporting/TableContents.json'+queryString}).
