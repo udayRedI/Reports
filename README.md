@@ -1,6 +1,6 @@
 Reporting in Angular.js
 
-Note: This is still a development version.
+Note: This is still under development.
 
 Add the ```<database-reporting></database-reporting>``` tag and add the dependency scripts as in index.html.
 
